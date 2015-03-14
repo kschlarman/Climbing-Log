@@ -11,7 +11,11 @@ var climbs = require('./routes/climbs');
 
 var app = express();
 
-mongoose.connect('mongodb://localhost/climbing_log', function(err) {
+var uristring = process.env.MONGOLAB_URI || 
+                process.env.MONGOHQ_URL ||
+                'mongodb://localhost/climbing_log';
+
+mongoose.connect(uristring, function(err) {
   if(err) {
     console.log('connection error', err);
   } else {
