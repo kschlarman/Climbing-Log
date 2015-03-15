@@ -2,12 +2,23 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <!-- build:css -->
+    <link rel='stylesheet' href='/public/app.css' />
+    <!-- endbuild -->
   </head>
   <body>
-    <div id="app"></div>
-    <!-- build:js -->
-    <script src="public/app.js"></script>
-    <!-- endbuild -->
+
+    <div class='main-header'>
+      <div class='l-content'>
+        <span class="brand">Climbing Log</a>
+      </div>
+    </div>
+
+    <div class='l-content'>
+      <div id="app"></div>
+      <!-- build:js -->
+      <script src="public/app.js"></script>
+      <!-- endbuild -->
   </body>
 </html>

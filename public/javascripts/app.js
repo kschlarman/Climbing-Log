@@ -3,9 +3,9 @@ var React = require('react');
 var App = React.createClass({
   render: function(){
     return (
-      <div>
+      <h1>
         This is some cool stuff, so?
-      </div>
+      </h1>
     )
   }
 });
