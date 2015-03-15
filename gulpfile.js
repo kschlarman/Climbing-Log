@@ -1,55 +1,71 @@
 var gulp = require('gulp');
-var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
-var react = require('gulp-react');
 var htmlreplace = require('gulp-html-replace');
 var del = require('del');
+var source = require('vinyl-source-stream');
+var browserify = require('browserify');
+var watchify = require('watchify');
+var reactify = require('reactify');
+var streamify = require('gulp-streamify');
 
 var path = {
-  HTML: ['views/index.ejs', 'views/error.ejs'],
-  ALL: ['public/javascripts/*.js', 'public/javascripts/**/*.js', 'views/index.ejs'],
-  JS: ['public/javascripts/*.js', 'public/javascripts/**/*.js'],
-  MINIFIED_OUT: 'build.min.js',
-  DEST_SRC: 'dist/public',
-  DEST_BUILD: 'dist/build',
-  DEST: 'dist'
+  VIEWS: ['views/index.ejs', 'views/error.ejs'],
+  MINIFIED_OUT: 'app.min.js',
+  OUT: 'app.js',
+  DEST_PUBLIC: 'build/public',
+  DEST_VIEWS: 'build/views',
+  ENTRY_POINT: './public/javascripts/app.js'
 };
 
-gulp.task('transform', function(){
-  gulp.src(path.JS)
-    .pipe(react())
-    .pipe(gulp.dest(path.DEST_SRC));
-});
-
 gulp.task('copy', function(){
-  gulp.src(path.HTML)
-    .pipe(gulp.dest(path.DEST));
+  gulp.src(path.VIEWS)
+    .pipe(gulp.dest(path.DEST_VIEWS));
 });
 
-gulp.task('watch', function(){
-  gulp.watch(path.ALL, ['transform', 'copy']);
+gulp.task('watch', function() {
+  gulp.watch(path.VIEWS, ['copy']);
+
+  var watcher  = watchify(browserify({
+    entries: [path.ENTRY_POINT],
+    transform: [reactify],
+    debug: true,
+    cache: {}, packageCache: {}, fullPaths: true
+  }));
+
+  return watcher.on('update', function () {
+    watcher.bundle()
+      .pipe(source(path.OUT))
+      .pipe(gulp.dest(path.DEST_PUBLIC))
+      console.log('Updated');
+  })
+    .bundle()
+    .pipe(source(path.OUT))
+    .pipe(gulp.dest(path.DEST_PUBLIC));
 });
 
 gulp.task('build', function(){
-  gulp.src(path.JS)
-    .pipe(react())
-    .pipe(concat(path.MINIFIED_OUT))
-    .pipe(uglify(path.MINIFIED_OUT))
-    .pipe(gulp.dest(path.DEST_BUILD));
+  browserify({
+    entries: [path.ENTRY_POINT],
+    transform: [reactify],
+  })
+    .bundle()
+    .pipe(source(path.MINIFIED_OUT))
+    .pipe(streamify(uglify(path.MINIFIED_OUT)))
+    .pipe(gulp.dest(path.DEST_PUBLIC));
 });
 
 gulp.task('replaceHTML', function(){
-  gulp.src(path.HTML)
+  gulp.src(path.VIEWS)
     .pipe(htmlreplace({
-      'js': 'build/' + path.MINIFIED_OUT
+      'js': 'public/' + path.MINIFIED_OUT
     }))
-    .pipe(gulp.dest(path.DEST));
+    .pipe(gulp.dest(path.DEST_VIEWS));
 });
-
-gulp.task('default', ['watch']);
 
 gulp.task('production', ['clean', 'replaceHTML', 'build']);
 
+gulp.task('default', ['watch']);
+
 gulp.task('clean', function() {
-  del('dist');
+  del('build');
 });

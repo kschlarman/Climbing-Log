@@ -24,7 +24,7 @@ mongoose.connect(uristring, function(err) {
 });
 
 // view engine setup
-app.set('views', path.join(__dirname, '/dist'))
+app.set('views', path.join(__dirname, 'build/views'))
 app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
@@ -33,7 +33,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, 'build')));
 
 app.use('/', routes);
 app.use('/climbs', climbs);
