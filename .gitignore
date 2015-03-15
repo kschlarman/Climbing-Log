@@ -7,3 +7,5 @@ build
 
 # Dependency directory
 node_modules
+
+.DS_Store
