@@ -14,15 +14,17 @@ var concat = require('gulp-concat');
 
 var path = {
   VIEWS: ['views/index.ejs', 'views/error.ejs'],
-  STYLESHEETS: ['public/stylesheets/layout.scss',
-                'public/stylesheets/main-header.scss'],
+  STYLESHEETS: ['public/stylesheets/base.scss',
+                'public/stylesheets/layout.scss',
+                'public/stylesheets/main-header.scss',
+                'public/stylesheets/climb-card.scss'],
   JS_MINIFIED_OUT: 'app.min.js',
   CSS_MINIFIED_OUT: 'app.min.css',
   JS_OUT: 'app.js',
   CSS_OUT: 'app.css',
   DEST_PUBLIC: 'build/public',
   DEST_VIEWS: 'build/views',
-  ENTRY_POINT: './public/javascripts/app.js'
+  ENTRY_POINT: './public/javascripts/app.jsx'
 };
 
 gulp.task('copy_views', function(){
