@@ -7,20 +7,8 @@ var Climbs = React.createClass({
   getInitialState: function() {
     return {data: []};
   },
-  componentDidMount: function() {
-    $.ajax({
-      url: this.props.url,
-      dataType: 'json',
-      success: function(data) {
-        this.setState({data: data});
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
-      }.bind(this)
-    });
-  },
   render: function() {
-    var climbs = this.state.data.map(function (climb) {
+    var climbs = this.props.climbs.map(function (climb) {
 
     var classes = classnames({
       'climb-card': true,
@@ -29,7 +17,7 @@ var Climbs = React.createClass({
     });
 
       return (
-        <div className={classes}>
+        <div key={climb._id} className={classes}>
           <span className='name'>{climb.name}</span>
           <span className='grade'>{climb.grade}</span>
         </div>

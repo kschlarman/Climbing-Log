@@ -1,6 +1,8 @@
+@import 'defaults';
+
 .l-content {
-  width: 768px;
+  width: $base-width;
   margin-left: auto;
   margin-right: auto;
-  padding: 0em 30px;
+  padding: 0em $base-spacing-unit;
 }

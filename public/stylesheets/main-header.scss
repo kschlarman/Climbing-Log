@@ -1,12 +1,14 @@
+@import 'defaults';
+
 .main-header {
-  background: #E82C0C;
-  padding-top: 1.5em;
+  background: $primary-color;
+  padding-top: $base-spacing-unit;
 
   .brand {
     color: white;
-    font-size: 30px;
+    font-size: $h2-size;
     display: inline-block;
-    padding: .5em 0em;
+    padding: $half-spacing-unit 0em;
     text-transform: uppercase;
   }
 }

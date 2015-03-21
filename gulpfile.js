@@ -11,13 +11,15 @@ var sass = require('gulp-sass');
 var rename = require('gulp-rename');
 var minifycss = require('gulp-minify-css');
 var concat = require('gulp-concat');
+var order = require("gulp-order");
 
 var path = {
   VIEWS: ['views/index.ejs', 'views/error.ejs'],
   STYLESHEETS: ['public/stylesheets/base.scss',
                 'public/stylesheets/layout.scss',
                 'public/stylesheets/main-header.scss',
-                'public/stylesheets/climb-card.scss'],
+                'public/stylesheets/climb-card.scss',
+                'public/stylesheets/timeline.scss'],
   JS_MINIFIED_OUT: 'app.min.js',
   CSS_MINIFIED_OUT: 'app.min.css',
   JS_OUT: 'app.js',
@@ -34,9 +36,10 @@ gulp.task('copy_views', function(){
 
 gulp.task('copy_sass', function () {
     gulp.src(path.STYLESHEETS)
-        .pipe(sass())
-        .pipe(concat(path.CSS_OUT))
-        .pipe(gulp.dest(path.DEST_PUBLIC));
+      .pipe(order(path.STYLESHEETS))
+      .pipe(sass())
+      .pipe(concat(path.CSS_OUT))
+      .pipe(gulp.dest(path.DEST_PUBLIC));
 });
 
 gulp.task('watch', ['copy_views', 'copy_sass'], function() {

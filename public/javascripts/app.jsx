@@ -1,7 +1,8 @@
 var React = require('react');
-var Climbs = require('./climbs.jsx');
+var Timeline = require('./timeline.jsx');
 
 React.render(
-  <Climbs url="climbs"/>,
+  //<Climbs url="timeline"/>,
+  <Timeline url="timeline"/>,
   document.getElementById('climbs')
 );

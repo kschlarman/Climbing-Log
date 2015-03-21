@@ -4,7 +4,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Climb = require('../models/Climb.js');
 
-/* GET /todos */
+/* GET /climbs */
 router.get('/', function(req, res, next) {
   Climb.find(function(err, climbs) {
     if (err) return next(err);
@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
   });
 });
 
-/* POST /todos */
+/* POST /climbs */
 router.post('/', function(req, res, next) {
   Climb.create(req.body, function (err, post) {
     if (err) return next(err);
@@ -20,7 +20,7 @@ router.post('/', function(req, res, next) {
   });
 });
 
-/* GET /todos/id */
+/* GET /climbs/id */
 router.get('/:id', function(req, res, next) {
   Climb.findById(req.params.id, function (err, post) {
     if (err) return next(err);
@@ -28,7 +28,7 @@ router.get('/:id', function(req, res, next) {
   });
 });
 
-/* PUT /todos/:id */
+/* PUT /climbs/:id */
 router.put('/:id', function(req, res, next) {
   Climb.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
     console.log(req.body)
@@ -38,7 +38,7 @@ router.put('/:id', function(req, res, next) {
   });
 });
 
-/* DELETE /todos/:id */
+/* DELETE /climbs/:id */
 router.delete('/:id', function(req, res, next) {
   Climb.findByIdAndRemove(req.params.id, req.body, function (err, post) {
     if (err) return next(err);

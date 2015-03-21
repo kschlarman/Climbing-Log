@@ -1,17 +1,20 @@
+@import 'defaults';
+
 .climb-card {
-  box-shadow: 0 1px 4px rgba(0,0,0,.2);
-  padding: 20px;
-  margin-top: 10px;
   background: white;
-  border-left-width: 20px;
+  font-size: $h4-size;
+  padding: $base-spacing-unit; 
+  margin-top: $half-spacing-unit;
+  box-shadow: 0 1px 4px rgba(0,0,0,.2);
+  border-left-width: $base-spacing-unit;
   border-left-style: solid;
 
   &.trad {
-    border-color: #E82C0C;
+    border-color: $primary-color;
   }
 
   &.sport {
-    border-color: blue; 
+    border-color: $secondary-color; 
   }
 
   .grade {
