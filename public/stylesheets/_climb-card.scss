@@ -1,6 +1,5 @@
-@import 'defaults';
-
 .climb-card {
+  @extend .noselect;
   background: white;
   font-size: $h4-size;
   padding: $base-spacing-unit; 
@@ -8,13 +7,26 @@
   box-shadow: 0 1px 4px rgba(0,0,0,.2);
   border-left-width: $base-spacing-unit;
   border-left-style: solid;
+  cursor: pointer;
 
   &.trad {
     border-color: $primary-color;
   }
 
   &.sport {
-    border-color: $secondary-color; 
+    border-color: $secondary-color;
+  } 
+
+  .notes {
+    font-size: $h6-size;
+    padding-top: $half-spacing-unit;
+    display: none;
+  }
+
+  &.open {
+    .notes {
+      display: block;
+    }
   }
 
   .grade {

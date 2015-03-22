@@ -7,7 +7,8 @@ var ClimbSchema = new mongoose.Schema({
   area: String,
   location: String,
   lead: Boolean,
-  date: Date
+  date: Date,
+  notes: String
 });
 
 ClimbSchema.options.toJSON = {
