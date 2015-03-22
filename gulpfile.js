@@ -14,7 +14,8 @@ var concat = require('gulp-concat');
 
 var path = {
   VIEWS: ['views/index.ejs', 'views/error.ejs'],
-  STYLESHEETS: ['public/stylesheets/app.scss'],
+  STYLESHEETS: ['public/stylesheets/*.scss'],
+  STYLESHEET: ['public/stylesheets/app.scss'],
   JS_MINIFIED_OUT: 'app.min.js',
   CSS_MINIFIED_OUT: 'app.min.css',
   JS_OUT: 'app.js',
@@ -30,7 +31,7 @@ gulp.task('copy_views', function(){
 });
 
 gulp.task('copy_sass', function () {
-    gulp.src(path.STYLESHEETS)
+    gulp.src(path.STYLESHEET)
       .pipe(sass({errLogToConsole: true}))
       .pipe(concat(path.CSS_OUT))
       .pipe(gulp.dest(path.DEST_PUBLIC));
@@ -70,7 +71,7 @@ gulp.task('build_js', function(){
 });
 
 gulp.task('build_sass', function () {
-    gulp.src(path.STYLESHEETS)
+    gulp.src(path.STYLESHEET)
         .pipe(sass())
         .pipe(concat(path.CSS_MINIFIED_OUT))
         .pipe(minifycss())
