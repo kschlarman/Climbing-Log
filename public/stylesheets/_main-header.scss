@@ -1,13 +1,17 @@
 .main-header {
   background: $primary-color;
   padding-top: $base-spacing-unit;
+  padding-bottom: $half-spacing-unit;
 
   .brand {
     color: white;
     font-size: $h2-size;
     display: inline-block;
-    padding: $half-spacing-unit 0em;
     text-transform: uppercase;
+  }
+
+  .main-header-right {
+    float: right;
   }
 }
 

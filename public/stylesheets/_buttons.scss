@@ -1,0 +1,14 @@
+.button {
+  @extend .noselect;
+  background: white;
+  padding: $half-spacing-unit/2;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+
+  &:hover {
+    background: $primary-color-light;
+    color: white;
+  }
+}

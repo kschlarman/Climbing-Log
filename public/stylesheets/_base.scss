@@ -1,5 +1,6 @@
 body {
   background: $neutral-color;
+  min-width: $base-width + $base-spacing-unit*2 
 }
 
 h1, .alpha {
