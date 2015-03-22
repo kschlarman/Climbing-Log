@@ -37,7 +37,7 @@ gulp.task('copy_views', function(){
 gulp.task('copy_sass', function () {
     gulp.src(path.STYLESHEETS)
       .pipe(order(path.STYLESHEETS))
-      .pipe(sass())
+      .pipe(sass({errLogToConsole: true}))
       .pipe(concat(path.CSS_OUT))
       .pipe(gulp.dest(path.DEST_PUBLIC));
 });
