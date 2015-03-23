@@ -6,9 +6,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-var routes = require('./routes/index');
 var climbs = require('./routes/climbs');
 var timeline = require('./routes/timeline');
+var routes = require('./routes/index');
 
 var app = express();
 
@@ -36,9 +36,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'build')));
 
-app.use('/', routes);
 app.use('/climbs', climbs);
 app.use('/timeline', timeline);
+app.use('/', routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

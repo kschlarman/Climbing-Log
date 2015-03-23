@@ -28,6 +28,7 @@
     "mongoose": "^3.8.24",
     "morgan": "~1.5.1",
     "react": "^0.13.0",
+    "react-router": "^0.13.1",
     "reactify": "^1.1.0",
     "serve-favicon": "~2.2.0",
     "vinyl-source-stream": "^1.1.0",

@@ -3,9 +3,11 @@
   background: white;
   padding: $half-spacing-unit/2;
   font-weight: bold;
-  text-decoration: none;
+  color: black;
   display: inline-block;
   cursor: pointer;
+  text-decoration: none;
+  border: 0 rgba(0,0,0,0);
 
   &:hover {
     background: $primary-color-light;
