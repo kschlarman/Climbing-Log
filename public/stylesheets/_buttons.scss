@@ -13,4 +13,15 @@
     background: $primary-color-light;
     color: white;
   }
+
+  &.inverted {
+    background: $primary-color;
+    color: white;
+  }
+
+  &.inverted:hover {
+    background: $primary-color-light;
+  }
+
+
 }

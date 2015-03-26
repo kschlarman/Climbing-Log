@@ -1,26 +1,49 @@
 var React = require('react');
+$ = require('jquery');
 
 var NewClimb = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.func
+  },
+  handleClick: function() {
+    var climb = {
+      name: this.refs.name.getDOMNode().value,
+      grade: this.refs.grade.getDOMNode().value,
+      lead: this.refs.lead.getDOMNode().checked,
+      type: this.refs.type.getDOMNode().value,
+      notes: this.refs.notes.getDOMNode().value,
+      location: this.refs.location.getDOMNode().value,
+      date: this.refs.date.getDOMNode().value
+    };
+
+    $.ajax({
+      url: 'climbs',
+      method: 'POST',
+      data: climb,
+      dataType: 'json',
+      success: function(data) {
+        this.context.router.transitionTo('/');
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error('timeline', status, err.toString());
+      }.bind(this)
+    });
+  },
   render: function() {
     return (
       <div>
         <h3>New Climb</h3>
-        <form className="pure-form pure-form-stacked">
+
+        <div className="pure-g">
+          <div className="pure-u-1-2 pure-form pure-form-stacked">
+
             <label>Climb Name
-              <input type="text" placeholder="Exasperator" />
+              <input type="text" ref="name" placeholder="Exasperator" />
             </label>
 
-            <label>Location
-              <input type="text" placeholder="Squamish" />
-            </label>
-
-            <label>Date
-              <input type="date" />
-            </label>
-
-            <label>Grade
-              <select>
-                <option>5.4</option>
+            <label>Grade 
+              <select defaultValue="5.8" ref="grade">
+                <option>5.4<  /option>
                 <option>5.5</option>
                 <option>5.6</option>
                 <option>5.7</option>
@@ -37,19 +60,34 @@ var NewClimb = React.createClass({
               </select>
             </label>
 
-            <label><input type="radio" name="type" value="sport" />Sport</label>
-            <label><input type="radio" name="type" value="trad" />Trad</label>
-
             <label className="pure-checkbox">
-                <input type="checkbox" checked="false" />Lead?
+               <input type="checkbox" defaultChecked='false' ref="lead" /> Lead?
+            </label>
+
+            <label>Type 
+              <select defaultValue="sport" ref="type">
+                <option value="sport">Sport</option>
+                <option value="trad">Trad</option>
+              </select>
             </label>
 
             <label>Note
-              <textarea name="description" rows="4" cols="50" value="This is a description." />
+              <textarea rows="4" cols="50" ref="notes" placeholder="Cruxy start but sailed through the finish" />
+            </label>
+          </div>
+          
+          <div className="pure-u-1-2 pure-form pure-form-stacked">
+            <label>Location
+              <input type="text" ref="location" placeholder="Squamish" />
             </label>
 
-            <button type="submit" className="button">Sign in</button>
-        </form>
+            <label>Date
+              <input type="date" ref="date" />
+            </label>
+          </div>
+
+          <button className="button inverted" onClick={this.handleClick} >I climbed this!</button>
+        </div>
       </div>
     )
   }
