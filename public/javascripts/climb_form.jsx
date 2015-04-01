@@ -14,10 +14,22 @@ var ClimbForm = React.createClass({
 
     this.props.onSubmit(climb);
   },
-  render: function() {
+  componentDidUpdate: function() {
+    this.refs.name.getDOMNode().value = this.props.climb.name;
+    this.refs.grade.getDOMNode().value = this.props.climb.grade;
+    this.refs.lead.getDOMNode().checked = this.props.climb.lead;
+    this.refs.type.getDOMNode().value = this.props.climb.type;
+    this.refs.notes.getDOMNode().value = this.props.climb.notes;
+    this.refs.location.getDOMNode().value = this.props.climb.location;
+
+    if (this.props.climb.date) {
+      var date = new Date(this.props.climb.date);
+      this.refs.date.getDOMNode().value = date.toISOString().substring(0, 10); 
+    }
+  },
+  render: function() {  
     return (
       <div>
-        <h3>New Climb</h3>
 
         <div className="pure-g">
           <div className="pure-u-1-2 pure-form pure-form-stacked">

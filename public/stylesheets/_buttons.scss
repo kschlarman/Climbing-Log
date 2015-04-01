@@ -3,24 +3,21 @@
   background: white;
   padding: $half-spacing-unit/2;
   font-weight: bold;
+  font-size: $h5-size;
   color: black;
   display: inline-block;
   cursor: pointer;
   text-decoration: none;
   border: 0 rgba(0,0,0,0);
 
-  &:hover {
-    background: $primary-color-light;
-    color: white;
-  }
-
   &.inverted {
-    background: $primary-color;
+    background: $compliment-color;
     color: white;
   }
 
-  &.inverted:hover {
-    background: $primary-color-light;
+  &:hover {
+    background: $compliment-color-dark;
+    color: white;
   }
 
 

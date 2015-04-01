@@ -19,12 +19,23 @@
 
   .notes {
     font-size: $h6-size;
+  }
+
+  .notes, .actions {
     padding-top: $half-spacing-unit;
+  }
+
+  .actions {
+    float: right;
+  }
+
+  .fold {
     display: none;
+    overflow: hidden;
   }
 
   &.open {
-    .notes {
+    .fold {
       display: block;
     }
   }

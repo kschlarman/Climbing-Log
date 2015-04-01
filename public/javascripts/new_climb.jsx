@@ -22,7 +22,10 @@ var NewClimb = React.createClass({
   },
   render: function() {
     return (
-      <ClimbForm onSubmit={this.onSubmit} />
+      <div>
+        <h3>New Climb</h3>
+        <ClimbForm climb={{}} onSubmit={this.onSubmit} />
+      </div>
     )
   }
 });
