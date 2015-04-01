@@ -16,7 +16,7 @@ var App = React.createClass({
      <div>
        <div className='main-header'>
         <div className='l-content'>
-          <span className='brand'>Climbing Log</span>
+          <Link to='/'><span className='brand'>Climbing Log</span></Link>
           <div className='main-header-right'>
             <Link className='button' to='new'>+ Climb</Link>
           </div>
