@@ -15,6 +15,9 @@ var Climbs = React.createClass({
   openCard: function() {
     this.setState({open: !this.state.open});
   },
+  onDelete: function() {
+    this.props.onDelete(this.props.climb._id);
+  },
   render: function() {
     var climb = this.props.climb;
 
@@ -35,6 +38,7 @@ var Climbs = React.createClass({
           </div>
           <div className='actions'>
             <Link className='button inverted' to='edit' params={{id: climb._id}}>Edit</Link>
+            <a className='button inverted' onClick={this.onDelete}>Delete</a>
           </div>
         </div>
       </div>

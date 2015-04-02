@@ -6,9 +6,10 @@ $ = require('jquery');
 
 var Climbs = React.createClass({
   render: function() {
+    var self = this;
     var climbs = this.props.climbs.map(function (climb) {
       return (
-        <Climb climb={climb} />
+        <Climb climb={climb} onDelete={self.props.onDelete} />
       );
     });
     return (

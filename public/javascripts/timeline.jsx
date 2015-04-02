@@ -21,6 +21,35 @@ var Timeline = React.createClass({
       }.bind(this)
     });
   },
+  onDelete: function(id) {
+    this.removeClimb(id);
+    $.ajax({
+      url: 'climbs/' + id,
+      method: 'DELETE',
+      dataType: 'json',
+      error: function(xhr, status, err) {
+        console.error('timeline', status, err.toString());
+      }.bind(this)
+    });
+  },
+  removeClimb: function(id) {
+    var data = this.state.data.map(function(outing) {
+      var climbs = outing.climbs.filter(function(climb) {
+        return id !== climb._id;
+      });
+
+      if (climbs.length > 0) {
+        return {
+          _id: outing._id,
+          climbs: climbs
+        };
+      } 
+    });
+
+    data = data.filter(function(outing) { return outing != undefined }); 
+
+    this.setState({data: data});
+  },
   renderDate: function(dateString) {
     if (dateString == null) return; 
 
@@ -39,7 +68,7 @@ var Timeline = React.createClass({
             <span className='timeline-location'>{location}</span>
             <span className='timeline-date'>{self.renderDate(date)}</span>
           </h3>
-          <Climbs climbs={outing.climbs} />
+          <Climbs climbs={outing.climbs} onDelete={self.onDelete} />
         </div>
       );
     });

@@ -27,6 +27,10 @@
 
   .actions {
     float: right;
+
+    & > :not(:last-child) {
+      margin-right: $half-spacing-unit;
+    }
   }
 
   .fold {
