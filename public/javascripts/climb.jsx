@@ -15,8 +15,11 @@ var Climbs = React.createClass({
   openCard: function() {
     this.setState({open: !this.state.open});
   },
-  onDelete: function() {
-    this.props.onDelete(this.props.climb._id);
+  onDelete: function(e) {
+    e.stopPropagation();
+    if (window.confirm("Do you really want to delete this climb?")) { 
+      this.props.onDelete(this.props.climb._id);
+    }
   },
   render: function() {
     var climb = this.props.climb;
@@ -37,8 +40,8 @@ var Climbs = React.createClass({
             <b>Notes: </b>{climb.notes}
           </div>
           <div className='actions'>
-            <Link className='button inverted' to='edit' params={{id: climb._id}}>Edit</Link>
             <a className='button inverted' onClick={this.onDelete}>Delete</a>
+            <Link className='button inverted' to='edit' params={{id: climb._id}}>Edit</Link>
           </div>
         </div>
       </div>
