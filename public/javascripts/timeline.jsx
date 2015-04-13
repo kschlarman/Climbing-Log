@@ -1,5 +1,6 @@
 var React = require('react');
 var Climbs = require('./climbs.jsx');
+var Api = require('./api.js');
 var classnames = require('classnames');
 
 
@@ -10,27 +11,14 @@ var Timeline = React.createClass({
     return {data: []};
   },
   componentDidMount: function() {
-    $.ajax({
-      url: 'timeline',
-      dataType: 'json',
-      success: function(data) {
-        this.setState({data: data});
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error('timeline', status, err.toString());
-      }.bind(this)
+    var self = this;
+    Api.getTimeline(function(timeline) {
+      self.setState({data: timeline});
     });
   },
   onDelete: function(id) {
     this.removeClimb(id);
-    $.ajax({
-      url: 'climbs/' + id,
-      method: 'DELETE',
-      dataType: 'json',
-      error: function(xhr, status, err) {
-        console.error('timeline', status, err.toString());
-      }.bind(this)
-    });
+    Api.removeClimb(id);
   },
   removeClimb: function(id) {
     var data = this.state.data.map(function(outing) {

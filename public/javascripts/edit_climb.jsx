@@ -1,6 +1,7 @@
 var React = require('react');
 $ = require('jquery');
 var ClimbForm = require('./climb_form.jsx');
+var Api = require('./api.js');
 
 var EditClimb = React.createClass({
   contextTypes: {
@@ -10,29 +11,15 @@ var EditClimb = React.createClass({
     return {climb: {}};
   },
   componentDidMount: function() {
-    $.ajax({
-      url: 'climbs/' + this.props.params.id,
-      dataType: 'json',
-      success: function(data) {
-        this.setState({climb: data});
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error('timeline', status, err.toString());
-      }.bind(this)
+    var self = this;
+    Api.getClimb(this.props.params.id, function(data) {
+      self.setState({climb: data});
     });
   },
   onSubmit: function(climb) {
-    $.ajax({
-      url: 'climbs/' + this.props.params.id,
-      method: 'PUT',
-      data: climb,
-      dataType: 'json',
-      success: function(data) {
-        this.context.router.transitionTo('/');
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error('timeline', status, err.toString());
-      }.bind(this)
+    var self = this;
+    Api.editClimb(this.props.params.id, climb, function(data) {
+      self.context.router.transitionTo('/');
     });
   },
   render: function() {
