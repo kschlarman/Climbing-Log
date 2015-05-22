@@ -4,3 +4,15 @@
   margin-right: auto;
   padding: 0em $base-spacing-unit;
 }
+
+.l-full-width {
+  width: 100%;
+}
+
+.l-space > * {
+  margin-right: $half-spacing-unit;
+
+  &:last-child {
+    margin-right: 0px;
+  }
+}

@@ -10,6 +10,17 @@ module.exports = {
     });
   },
 
+  getAnalytics: function(success) {
+    $.ajax({
+      url: 'analytics',
+      dataType: 'json',
+      success: function(data) {
+        success(data);
+      },
+      error: _logError 
+    });
+  },
+
   removeClimb: function(id) {
     $.ajax({
       url: 'climbs/' + id,

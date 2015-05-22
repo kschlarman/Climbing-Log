@@ -8,6 +8,7 @@ var mongoose = require('mongoose');
 
 var climbs = require('./routes/climbs');
 var timeline = require('./routes/timeline');
+var analytics = require('./routes/analytics');
 var routes = require('./routes/index');
 
 var app = express();
@@ -38,6 +39,7 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 app.use('/climbs', climbs);
 app.use('/timeline', timeline);
+app.use('/analytics', analytics);
 app.use('/', routes);
 
 // catch 404 and forward to error handler
