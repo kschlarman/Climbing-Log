@@ -3,7 +3,7 @@ var Router = require('react-router');
 var Timeline = require('./timeline.jsx');
 var NewClimb = require('./new_climb.jsx');
 var EditClimb = require('./edit_climb.jsx');
-var ClimbsByGrade = require('./climbs_by_grade.jsx');
+var Analytics = require('./analytics.jsx');
 
 var Route = Router.Route;
 var DefaultRoute = Router.DefaultRoute;
@@ -36,7 +36,7 @@ var App = React.createClass({
 var routes = (
   <Route path="/" handler={App}>
     <Route name="new" path="/new" handler={NewClimb}/>
-    <Route name="analytics" path="/analytics" handler={ClimbsByGrade}/>
+    <Route name="analytics" path="/analytics" handler={Analytics}/>
     <Route name="edit" path="/edit/:id" handler={EditClimb} />
     <DefaultRoute handler={Timeline}/>
   </Route>

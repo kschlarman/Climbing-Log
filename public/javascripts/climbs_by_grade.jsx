@@ -1,17 +1,7 @@
 var React = require('react');
 var BarChart = require("react-chartjs").Bar;
-var Api = require('./api.js');
 
 var ClimbsByGrade = React.createClass({
-  getInitialState: function() {
-    return { data: [] };
-  },
-  componentDidMount: function() {
-    var self = this;
-    Api.getAnalytics(function(data) {
-      self.setState({ data: data });
-    });
-  },
   grades: function() {
     return ["5.4", "5.5", "5.6", "5.7", "5.8", "5.9", "5.10a", "5.10b"];
   },
@@ -19,7 +9,7 @@ var ClimbsByGrade = React.createClass({
     var sparseCounts = { sport: {}, trad: {} };
     var fullCounts = { sport: [], trad: [] }
 
-    this.state.data.forEach(function(gradeData) {
+    this.props.data.forEach(function(gradeData) {
       if (gradeData._id.type === "sport") {
         sparseCounts.sport[gradeData._id.grade] = gradeData.count;
       } else {
