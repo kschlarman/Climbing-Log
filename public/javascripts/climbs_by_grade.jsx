@@ -10,10 +10,10 @@ var ClimbsByGrade = React.createClass({
     var fullCounts = { sport: [], trad: [] }
 
     this.props.data.forEach(function(gradeData) {
-      if (gradeData._id.type === "sport") {
-        sparseCounts.sport[gradeData._id.grade] = gradeData.count;
+      if (gradeData.type === "sport") {
+        sparseCounts.sport[gradeData.grade] = gradeData.count;
       } else {
-        sparseCounts.trad[gradeData._id.grade] = gradeData.count;
+        sparseCounts.trad[gradeData.grade] = gradeData.count;
       }
     });
 

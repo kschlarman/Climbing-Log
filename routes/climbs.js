@@ -1,48 +1,62 @@
 var express = require('express');
 var router = express.Router();
 
-var mongoose = require('mongoose');
-var Climb = require('../models/Climb.js');
+var models  = require('../models');
 
 /* GET /climbs */
 router.get('/', function(req, res, next) {
-  Climb.find(function(err, climbs) {
-    if (err) return next(err);
+  models.Climb.all()
+  .then(function(climbs) {
     res.json(climbs);
+   })
+  .catch(function(err) {
+    return next(err);
   });
 });
 
 /* POST /climbs */
 router.post('/', function(req, res, next) {
-  Climb.create(req.body, function (err, post) {
-    if (err) return next(err);
-    res.json(post);
+  models.Climb.create(req.body)
+  .then(function(climb) {
+    res.json(climb);
+  })
+  .catch(function(err) {
+    return next(err);
   });
 });
 
 /* GET /climbs/id */
 router.get('/:id', function(req, res, next) {
-  Climb.findById(req.params.id, function (err, post) {
-    if (err) return next(err);
-    res.json(post);
+  models.Climb.findById(req.params.id)
+  .then(function(climb) {
+    res.json(climb);
+  })
+  .catch(function(err) {
+    return next(err);
   });
 });
 
 /* PUT /climbs/:id */
 router.put('/:id', function(req, res, next) {
-  Climb.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
-    console.log(req.body)
-    console.log(post)
-    if (err) return next(err);
-    res.json(post);
+  models.Climb.findById(req.params.id)
+  .then(function(climb) {
+    climb.update(req.body);
+    res.json(climb);
+  })
+  .catch(function(err) {
+    return next(err);
   });
 });
 
 /* DELETE /climbs/:id */
 router.delete('/:id', function(req, res, next) {
-  Climb.findByIdAndRemove(req.params.id, req.body, function (err, post) {
-    if (err) return next(err);
-    res.json(post);
+  models.Climb.findById(req.params.id)
+  .then(function(climb) {
+    climb.destroy();
+    res.json(climb);
+  })
+  .catch(function(err) {
+    return next(err);
   });
 });
 

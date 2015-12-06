@@ -23,12 +23,12 @@ var Timeline = React.createClass({
   removeClimb: function(id) {
     var data = this.state.data.map(function(outing) {
       var climbs = outing.climbs.filter(function(climb) {
-        return id !== climb._id;
+        return id !== climb.id;
       });
 
       if (climbs.length > 0) {
         return {
-          _id: outing._id,
+          info: outing.info,
           climbs: climbs
         };
       } 
@@ -47,8 +47,8 @@ var Timeline = React.createClass({
   render: function() {
     var self = this;
     var outings = this.state.data.map(function (outing) {
-      var location = outing._id.location;
-      var date = outing._id.date;
+      var location = outing.info.location;
+      var date = outing.info.date;
      
       return (
         <div key={location + date}>

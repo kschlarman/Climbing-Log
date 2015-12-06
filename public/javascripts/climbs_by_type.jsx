@@ -6,10 +6,10 @@ var ClimbsByType = React.createClass({
     var counts = {sport: 1, trad: 0}
 
     this.props.data.forEach(function(gradeData) {
-      if (gradeData._id.type === "sport") {
-        counts.sport += gradeData.count;
+      if (gradeData.type === "sport") {
+        counts.sport += parseInt(gradeData.count, 10);
       } else {
-        counts.trad += gradeData.count;
+        counts.trad += parseInt(gradeData.count, 10);
       }
     });
 
