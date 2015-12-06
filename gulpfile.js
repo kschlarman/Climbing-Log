@@ -46,7 +46,7 @@ gulp.task('watch', ['copy_views', 'copy_sass'], function() {
     transform: [reactify],
     debug: true,
     cache: {}, packageCache: {}, fullPaths: true
-  }));
+  }), {poll: 100});
 
   return watcher.on('update', function () {
     watcher.bundle()
