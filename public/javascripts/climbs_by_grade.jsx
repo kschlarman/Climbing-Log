@@ -3,7 +3,7 @@ var BarChart = require("react-chartjs").Bar;
 
 var ClimbsByGrade = React.createClass({
   grades: function() {
-    return ["5.4", "5.5", "5.6", "5.7", "5.8", "5.9", "5.10a", "5.10b"];
+    return ["5.4", "5.5", "5.6", "5.7", "5.8", "5.9", "5.10a", "5.10b", "5.10c", "5.10d"];
   },
   gradeCounts: function() {
     var sparseCounts = { sport: {}, trad: {} };
