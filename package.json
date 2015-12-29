@@ -37,6 +37,7 @@
     "react-router": "^0.13.1",
     "reactify": "^1.1.0",
     "sequelize": "^3.13.0",
+    "sequelize-cli": "^2.2.1",
     "serve-favicon": "~2.2.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.6.0"

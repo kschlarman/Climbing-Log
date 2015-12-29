@@ -1,22 +1,27 @@
-if (!global.hasOwnProperty('db')) {
-  var Sequelize = require('sequelize')
-    , sequelize = null
+'use strict';
 
-  if (process.env.DATABASE_URL) {
-    // the application is executed on Heroku ... use the postgres database
-    sequelize = new Sequelize(process.env.DATABASE_URL, {
-      logging: console.log
-    })
-  } else {
-    // the application is executed on the local machine
-    sequelize = new Sequelize("postgres://localhost/climbing_log")
-  }
+var Sequelize = require('sequelize');
+var env       = process.env.NODE_ENV || 'development';
+var config    = require(__dirname + '/../config.json')[env];
+var db        = {};
 
-  global.db = {
-    Sequelize: Sequelize,
-    sequelize: sequelize,
-    Climb:     sequelize.import(__dirname + '/climb') 
-  }
+if (config.use_env_variable) {
+  var sequelize = new Sequelize(process.env[config.use_env_variable]);
+} else {
+  var sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
-module.exports = global.db
+db = {
+  Climb: sequelize.import(__dirname + '/climb') 
+}
+
+Object.keys(db).forEach(function(modelName) {
+  if (db[modelName].associate) {
+    db[modelName].associate(db);
+  }
+});
+
+db.sequelize = sequelize;
+db.Sequelize = Sequelize;
+
+module.exports = db;

@@ -2,7 +2,7 @@ var _ = require('lodash');
 var express = require('express');
 var router = express.Router();
 
-var models  = require('../models');
+var models  = require('../models/index');
 
 /* GET /timeline */
 router.get('/', function(req, res, next) {
