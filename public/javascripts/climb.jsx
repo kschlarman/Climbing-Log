@@ -6,7 +6,7 @@ var classnames = require('classnames');
 
 $ = require('jquery');
 
-var Climbs = React.createClass({
+var Climb = React.createClass({
   getInitialState: function() {
     return {
       open: false
@@ -49,5 +49,5 @@ var Climbs = React.createClass({
   }
 });
 
-module.exports = Climbs;
+module.exports = Climb;
 
