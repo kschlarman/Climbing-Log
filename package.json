@@ -35,7 +35,7 @@
     "react": "^0.14.7",
     "react-chartjs": "^0.7.3",
     "react-dom": "^0.14.7",
-    "react-router": "^0.13.1",
+    "react-router": "^2.0.0",
     "reactify": "^1.1.0",
     "sequelize": "^3.13.0",
     "sequelize-cli": "^2.2.1",

@@ -5,7 +5,7 @@ var Api = require('./api.js');
 
 var EditClimb = React.createClass({
   contextTypes: {
-    router: React.PropTypes.func
+    router: React.PropTypes.object.isRequired
   },
   getInitialState: function() {
     return {climb: {}};
@@ -19,7 +19,7 @@ var EditClimb = React.createClass({
   onSubmit: function(climb) {
     var self = this;
     Api.editClimb(this.props.params.id, climb, function(data) {
-      self.context.router.transitionTo('/');
+      self.context.router.push('/');
     });
   },
   render: function() {

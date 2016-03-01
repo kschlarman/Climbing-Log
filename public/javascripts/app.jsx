@@ -1,15 +1,16 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var Router = require('react-router');
 var Timeline = require('./timeline.jsx');
 var NewClimb = require('./new_climb.jsx');
 var EditClimb = require('./edit_climb.jsx');
 var Analytics = require('./analytics.jsx');
 
-var Route = Router.Route;
-var DefaultRoute = Router.DefaultRoute;
-var RouteHandler = Router.RouteHandler;
-var Link = Router.Link;
+var ReactRouter = require('react-router');
+var Router = ReactRouter.Router;
+var Route = ReactRouter.Route;
+var Link = ReactRouter.Link;
+var IndexRoute = ReactRouter.IndexRoute;
+var hashHistory = ReactRouter.hashHistory;
 
 var App = React.createClass({
   render: function() {
@@ -27,7 +28,7 @@ var App = React.createClass({
       </div>
       
       <div className='l-content'>
-        <RouteHandler params={this.props.params} />
+        {this.props.children}
       </div>
     </div>
     )
@@ -35,14 +36,14 @@ var App = React.createClass({
 });
 
 var routes = (
-  <Route path="/" handler={App}>
-    <Route name="new" path="/new" handler={NewClimb}/>
-    <Route name="analytics" path="/analytics" handler={Analytics}/>
-    <Route name="edit" path="/edit/:id" handler={EditClimb} />
-    <DefaultRoute handler={Timeline}/>
-  </Route>
+  <Router history={hashHistory}>
+    <Route path="/" component={App}>
+      <IndexRoute component={Timeline} />
+      <Route path="/new" component={NewClimb }/>
+      <Route path="/analytics" component={Analytics }/>
+      <Route path="/edit/:id" component={EditClimb} />
+    </Route>
+  </Router>
 );
 
-Router.run(routes, function (Handler, state) {
-  ReactDOM.render(<Handler params={state.params} />, document.getElementById('app'));
-});
+ReactDOM.render(routes, document.getElementById('app'));

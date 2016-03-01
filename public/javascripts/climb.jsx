@@ -41,7 +41,7 @@ var Climb = React.createClass({
           </div>
           <div className='actions'>
             <a className='button inverted' onClick={this.onDelete}>Delete</a>
-            <Link className='button inverted' to='edit' params={{id: climb.id}}>Edit</Link>
+            <Link className='button inverted' to={`/edit/${climb.id}`}>Edit</Link>
           </div>
         </div>
       </div>

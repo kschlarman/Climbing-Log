@@ -15,16 +15,19 @@ var ClimbForm = React.createClass({
     this.props.onSubmit(climb);
   },
   componentDidUpdate: function() {
-    this.refs.name.value = this.props.climb.name;
-    this.refs.grade.value = this.props.climb.grade;
-    this.refs.lead.checked = this.props.climb.lead;
-    this.refs.type.value = this.props.climb.type;
-    this.refs.notes.value = this.props.climb.notes;
-    this.refs.location.value = this.props.climb.location;
+    var climb = this.props.climb;
+    if (climb != undefined) {
+      this.refs.name.value = climb.name;
+      this.refs.grade.value = climb.grade;
+      this.refs.lead.checked = climb.lead;
+      this.refs.type.value = climb.type;
+      this.refs.notes.value = climb.notes;
+      this.refs.location.value = climb.location;
 
-    if (this.props.climb.date) {
-      var date = new Date(this.props.climb.date);
-      this.refs.date.value = date.toISOString().substring(0, 10); 
+      if (climb.date) {
+        var date = new Date(this.props.climb.date);
+        this.refs.date.value = date.toISOString().substring(0, 10); 
+      }    
     }
   },
   render: function() {  
@@ -40,11 +43,11 @@ var ClimbForm = React.createClass({
 
             <label>Grade 
               <select defaultValue="5.8" ref="grade">
-                <option>5.4<  /option>
+                <option>5.4</option>
                 <option>5.5</option>
                 <option>5.6</option>
                 <option>5.7</option>
-                <option>5.8</option>
+                <option value="5.8">5.8</option>
                 <option>5.9</option>
                 <option>5.10a</option>
                 <option>5.10b</option>

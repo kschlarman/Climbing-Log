@@ -5,19 +5,19 @@ var Api = require('./api.js');
 
 var NewClimb = React.createClass({
   contextTypes: {
-    router: React.PropTypes.func
+    router: React.PropTypes.object.isRequired
   },
   onSubmit: function(climb) {
     var self = this;
     Api.createClimb(climb, function() {
-      self.context.router.transitionTo('/');
+      self.context.router.push('/');
     });
   },
   render: function() {
     return (
       <div>
         <h3>New Climb</h3>
-        <ClimbForm climb={{}} onSubmit={this.onSubmit} />
+        <ClimbForm onSubmit={this.onSubmit} />
       </div>
     )
   }
