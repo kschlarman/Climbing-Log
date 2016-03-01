@@ -3,28 +3,28 @@ var React = require('react');
 var ClimbForm = React.createClass({
   handleClick: function() {
     var climb = {
-      name: this.refs.name.getDOMNode().value,
-      grade: this.refs.grade.getDOMNode().value,
-      lead: this.refs.lead.getDOMNode().checked,
-      type: this.refs.type.getDOMNode().value,
-      notes: this.refs.notes.getDOMNode().value,
-      location: this.refs.location.getDOMNode().value,
-      date: this.refs.date.getDOMNode().value
+      name: this.refs.name.value,
+      grade: this.refs.grade.value,
+      lead: this.refs.lead.checked,
+      type: this.refs.type.value,
+      notes: this.refs.notes.value,
+      location: this.refs.location.value,
+      date: this.refs.date.value
     };
 
     this.props.onSubmit(climb);
   },
   componentDidUpdate: function() {
-    this.refs.name.getDOMNode().value = this.props.climb.name;
-    this.refs.grade.getDOMNode().value = this.props.climb.grade;
-    this.refs.lead.getDOMNode().checked = this.props.climb.lead;
-    this.refs.type.getDOMNode().value = this.props.climb.type;
-    this.refs.notes.getDOMNode().value = this.props.climb.notes;
-    this.refs.location.getDOMNode().value = this.props.climb.location;
+    this.refs.name.value = this.props.climb.name;
+    this.refs.grade.value = this.props.climb.grade;
+    this.refs.lead.checked = this.props.climb.lead;
+    this.refs.type.value = this.props.climb.type;
+    this.refs.notes.value = this.props.climb.notes;
+    this.refs.location.value = this.props.climb.location;
 
     if (this.props.climb.date) {
       var date = new Date(this.props.climb.date);
-      this.refs.date.getDOMNode().value = date.toISOString().substring(0, 10); 
+      this.refs.date.value = date.toISOString().substring(0, 10); 
     }
   },
   render: function() {  

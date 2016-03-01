@@ -1,4 +1,5 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
 var Router = require('react-router');
 var Timeline = require('./timeline.jsx');
 var NewClimb = require('./new_climb.jsx');
@@ -43,5 +44,5 @@ var routes = (
 );
 
 Router.run(routes, function (Handler, state) {
-  React.render(<Handler params={state.params} />, document.getElementById('app'));
+  ReactDOM.render(<Handler params={state.params} />, document.getElementById('app'));
 });

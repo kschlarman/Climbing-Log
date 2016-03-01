@@ -9,7 +9,7 @@ var Climbs = React.createClass({
     var self = this;
     var climbs = this.props.climbs.map(function (climb) {
       return (
-        <Climb climb={climb} onDelete={self.props.onDelete} />
+        <Climb climb={climb} onDelete={self.props.onDelete} key={climb.id} />
       );
     });
     return (
