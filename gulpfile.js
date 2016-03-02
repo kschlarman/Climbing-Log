@@ -25,6 +25,10 @@ var path = {
   ENTRY_POINT: './public/javascripts/app.jsx'
 };
 
+var notify = function(error) {
+  console.log(error.message);
+};
+
 gulp.task('copy_views', function(){
   gulp.src(path.VIEWS)
     .pipe(gulp.dest(path.DEST_VIEWS));
@@ -50,6 +54,7 @@ gulp.task('watch', ['copy_views', 'copy_sass'], function() {
 
   return watcher.on('update', function () {
     watcher.bundle()
+      .on('error', notify)
       .pipe(source(path.JS_OUT))
       .pipe(gulp.dest(path.DEST_PUBLIC))
       console.log('Updated');
@@ -65,6 +70,7 @@ gulp.task('build_js', function(){
     transform: [reactify],
   })
     .bundle()
+    .on('error', notify)
     .pipe(source(path.JS_MINIFIED_OUT))
     .pipe(streamify(uglify(path.JS_MINIFIED_OUT)))
     .pipe(gulp.dest(path.DEST_PUBLIC));
