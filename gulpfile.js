@@ -11,6 +11,7 @@ var sass = require('gulp-sass');
 var rename = require('gulp-rename');
 var minifycss = require('gulp-minify-css');
 var concat = require('gulp-concat');
+var babelify = require('babelify');
 
 var path = {
   VIEWS: ['views/index.ejs', 'views/error.ejs'],
@@ -66,13 +67,13 @@ gulp.task('watch', ['copy_views', 'copy_sass'], function() {
 
 gulp.task('build_js', function(){
   browserify({
-    entries: [path.ENTRY_POINT],
-    transform: [reactify],
-  })
+      entries: [path.ENTRY_POINT],
+      extensions: ['.jsx']
+    })
+    .transform("babelify", {presets: ["es2015", "react"]})
     .bundle()
-    .on('error', notify)
     .pipe(source(path.JS_MINIFIED_OUT))
-    .pipe(streamify(uglify(path.JS_MINIFIED_OUT)))
+    .pipe(streamify(uglify().on('error', notify)))
     .pipe(gulp.dest(path.DEST_PUBLIC));
 });
 

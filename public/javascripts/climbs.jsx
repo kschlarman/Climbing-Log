@@ -2,8 +2,6 @@ var React = require('react');
 var Climb = require('./climb.jsx');
 var classnames = require('classnames');
 
-$ = require('jquery');
-
 var Climbs = React.createClass({
   render: function() {
     var self = this;

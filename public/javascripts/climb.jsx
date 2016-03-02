@@ -4,8 +4,6 @@ var Link = Router.Link;
 
 var classnames = require('classnames');
 
-$ = require('jquery');
-
 var Climb = React.createClass({
   getInitialState: function() {
     return {

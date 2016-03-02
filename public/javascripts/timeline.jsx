@@ -3,9 +3,6 @@ var Climbs = require('./climbs.jsx');
 var Api = require('./api.js');
 var classnames = require('classnames');
 
-
-$ = require('jquery');
-
 var Timeline = React.createClass({
   getInitialState: function() {
     return {data: []};

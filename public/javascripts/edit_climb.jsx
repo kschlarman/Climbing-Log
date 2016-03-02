@@ -1,5 +1,4 @@
 var React = require('react');
-$ = require('jquery');
 var ClimbForm = require('./climb_form.jsx');
 var Api = require('./api.js');
 

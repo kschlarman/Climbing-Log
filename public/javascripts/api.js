@@ -1,3 +1,5 @@
+var $ = require('jquery');
+
 module.exports = {
   getTimeline: function(success) { 
     $.ajax({
