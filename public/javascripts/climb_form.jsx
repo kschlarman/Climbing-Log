@@ -1,35 +1,43 @@
 var React = require('react');
 
 var ClimbForm = React.createClass({
-  handleClick: function() {
-    var climb = {
-      name: this.refs.name.value,
-      grade: this.refs.grade.value,
-      lead: this.refs.lead.checked,
-      type: this.refs.type.value,
-      notes: this.refs.notes.value,
-      location: this.refs.location.value,
-      date: this.refs.date.value
+  getInitialState: function() {
+    var today = new Date();
+    return {
+      name: "",
+      grade: "5.8",
+      lead: true,
+      type: "sport",
+      notes: "",
+      location: "",
+      date: today.toISOString().slice(0, 10)
     };
-
-    this.props.onSubmit(climb);
   },
-  componentDidUpdate: function() {
-    var climb = this.props.climb;
-    if (climb != undefined) {
-      this.refs.name.value = climb.name;
-      this.refs.grade.value = climb.grade;
-      this.refs.lead.checked = climb.lead;
-      this.refs.type.value = climb.type;
-      this.refs.notes.value = climb.notes;
-      this.refs.location.value = climb.location;
-
-      if (climb.date) {
-        var date = new Date(this.props.climb.date);
-        this.refs.date.value = date.toISOString().substring(0, 10); 
-      }    
-    }
+  handleClick: function() {
+    this.props.onSubmit(this.state);
   },
+  handleNameChange: function(event) {
+    this.setState({name: event.target.value});
+  },
+  handleLocationChange: function(event) {
+    this.setState({location: event.target.value});
+  },
+  handleLeadChange: function(event) {
+    this.setState({lead: event.target.checked});
+  },
+  handleGradeChange: function(event) {
+    this.setState({grade: event.target.value});
+  },
+  handleTypeChange: function(event) {
+    this.setState({type: event.target.value});
+  },
+  handleNotesChange: function(event) {
+    this.setState({notes: event.target.value});
+  },
+  handleDateChange: function(event) {
+    this.setState({date: event.target.value});
+  },
+
   render: function() {  
     return (
       <div>
@@ -38,11 +46,14 @@ var ClimbForm = React.createClass({
           <div className="pure-u-1-2 pure-form pure-form-stacked">
 
             <label>Climb Name
-              <input type="text" ref="name" placeholder="Exasperator" />
+              <input type="text" 
+                onChange={this.handleNameChange}
+                placeholder="Exasperator"
+                value={this.state.name} />
             </label>
 
             <label>Grade 
-              <select defaultValue="5.8" ref="grade">
+              <select onChange={this.handleGradeChange} value={this.state.grade}>
                 <option>5.4</option>
                 <option>5.5</option>
                 <option>5.6</option>
@@ -61,28 +72,41 @@ var ClimbForm = React.createClass({
             </label>
 
             <label className="pure-checkbox">
-               <input type="checkbox" defaultChecked='false' ref="lead" /> Lead?
+               <input type="checkbox"
+                 onChange={this.handleLeadChange}
+                 checked={this.state.lead}/> Lead?
             </label>
 
             <label>Type 
-              <select defaultValue="sport" ref="type">
+              <select defaultValue="sport"
+                onChange={this.handleTypeChange}
+                value={this.state.value}>
                 <option value="sport">Sport</option>
                 <option value="trad">Trad</option>
               </select>
             </label>
 
             <label>Note
-              <textarea rows="4" cols="50" ref="notes" placeholder="Cruxy start but sailed through the finish" />
+              <textarea
+                rows="4" cols="50"
+                placeholder="Cruxy start but sailed through the finish"
+                onChange={this.handleNotesChange}
+                value={this.state.notes}/>
             </label>
           </div>
           
           <div className="pure-u-1-2 pure-form pure-form-stacked">
             <label>Location
-              <input type="text" ref="location" placeholder="Squamish" />
+              <input type="text"
+                placeholder="Squamish"
+                onChange={this.handleLocationChange}
+                value={this.state.location}/>
             </label>
 
             <label>Date
-              <input type="date" ref="date" />
+              <input type="date"
+                onChange={this.handleDateChange}
+                value={this.state.date}/>
             </label>
           </div>
 
